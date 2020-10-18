@@ -6,7 +6,7 @@ import nico
 var
   size, padx, pady, csize, player, active_x, active_y, winner: int
   board: Table[(int, int), int]
-  player_cols: seq[int]
+  player_colours: seq[int]
 
 proc reset_game =
   size = 100
@@ -18,7 +18,7 @@ proc reset_game =
   active_y = 0
   winner = -1
   board = initTable[(int, int), int]()
-  player_cols = @[12, 14]
+  player_colours = @[12, 14]
 
 var
   p0_score = 0
@@ -103,18 +103,24 @@ proc gameDraw() =
   cls()
   draw_field()
   let (mx, my) = mouse()
+  let pressed = mousebtnp(0)
+  if pressed:
+    (active_x, active_y) = get_cell(mx, my)
+
   if winner == -1:
     if btnp(pcUp): active_y -= 1
     if btnp(pcDown): active_y += 1
     if btnp(pcLeft): active_x -= 1
     if btnp(pcRight): active_x += 1
+
   if active_x < 0: active_y = 0
   if active_x > 2: active_x = 0
   if active_y < 0: active_y = 0
   if active_y > 2: active_y = 0
-  if btnp(pcA):
+  if btnp(pcA) or pressed:
     if board_occupied(active_x, active_y) == -1:
       board[(active_x, active_y)] = player
+    
     winner = get_winner()
     if winner == -1:
       if player == 0: player = 1 else: player = 0
@@ -125,7 +131,7 @@ proc gameDraw() =
   for (x, y) in board.keys():
     draw_cell(x, y, board[(x,y)])
 
-  setColor(player_cols[player])
+  setColor(player_colours[player])
   box(padx + active_x * csize + 2, pady + csize * active_y + 2, csize - 4, csize - 4)
 
   if winner != -1:
