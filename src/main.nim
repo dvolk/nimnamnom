@@ -134,9 +134,9 @@ proc gameDraw() =
   setColor(player_colours[player])
   box(padx + active_x * csize + 2, pady + csize * active_y + 2, csize - 4, csize - 4)
 
+  if btnp(pcB):
+    reset_game()
   if winner != -1:
-    if btnp(pcB):
-      reset_game()
     setColor(7)
     boxfill(70, 73, 101, 20)
     setColor(0)
@@ -150,6 +150,7 @@ proc gameDraw() =
 
   setColor(7)
   print("Nim Nam Nom", 92, 5)
+  print("Press X to reset", 82, 130)
   print("Bob", 15, 40)
   print("Liz", 195, 40)
   print($p0_score, 20, 60)
