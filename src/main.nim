@@ -147,20 +147,20 @@ proc gameDraw() =
     boxfill(70, 73, 101, 20)
     setColor(0)
     if winner == 0:
-      print("Bob wins!", 95, 75)
+      printc("Bob wins!", 240 div 2, 75)
     if winner == 1:
-      print("Liz wins!", 95, 75)
+      printc("Liz wins!", 240 div 2, 75)
     if winner == 2:
-      print("Bob and Liz draw", 72, 75)
-    print("Press 'x' to reset", 72, 85)
+      printc("Bob and Liz draw", 240 div 2, 75)
+    printc("Press 'x' to reset", 240 div 2, 85)
 
   setColor(7)
-  print("Nim Nam Nom", 92, 5)
-  print("Press X to reset", 82, 130)
-  print("Bob", 15, 40)
-  print("Liz", 195, 40)
-  print($p0_score, 20, 60)
-  print($p1_score, 200, 60)
+  printc("Nim Nam Nom", 240 div 2, 5)
+  printc("Press X to reset", 240 div 2, 130)
+  printc("Bob", padx div 2, 40)
+  printc("Liz", 240 - (70 div 2), 40)
+  print($p0_score, padx div 2, 60)
+  print($p1_score, 240 - (70 div 2), 60)
     
 when isMainModule:
   nico.init("oxfordfun.com", "nimnamnom")
