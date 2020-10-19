@@ -127,13 +127,12 @@ proc gameDraw() =
   if btnp(pcA) or pressed:
     if board_occupied(active_x, active_y) == -1:
       board[(active_x, active_y)] = player
-    
-    winner = get_winner()
-    if winner == -1:
-      if player == 0: player = 1 else: player = 0
-    else:
-      if winner == 0: p0_score += 1
-      if winner == 1: p1_score += 1
+      winner = get_winner()
+      if winner == -1:
+        if player == 0: player = 1 else: player = 0
+      else:
+        if winner == 0: p0_score += 1
+        if winner == 1: p1_score += 1
 
   for (x, y) in board.keys():
     draw_cell(x, y, board[(x,y)])
