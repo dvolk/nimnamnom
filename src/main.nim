@@ -89,7 +89,10 @@ proc get_cell(x, y: int): (int, int) =
     let
       loc_x = floor(r_x / csize).int
       loc_y = floor(r_y / csize).int
-    return (loc_x, loc_y)
+    if loc_x <= 2 and loc_y <= 2:
+      return (loc_x, loc_y)
+    else:
+      return (-1, -1)
   else:
     return (-1, -1)
   
@@ -102,10 +105,14 @@ proc gameUpdate(dt: float32) =
 proc gameDraw() =
   cls()
   draw_field()
-  let (mx, my) = mouse()
-  let pressed = mousebtnp(0)
-  if pressed:
-    (active_x, active_y) = get_cell(mx, my)
+  let
+    (mx, my) = mouse()
+    pressed = mousebtnp(0)
+    (cx, cy) = get_cell(mx, my)
+
+  if cx != -1 and cy != -1:
+    active_x = cx
+    active_y = cy
 
   if winner == -1:
     if btnp(pcUp): active_y -= 1
