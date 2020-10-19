@@ -83,8 +83,8 @@ proc draw_field =
 
 proc get_cell(x, y: int): (int, int) =
   let
-    r_x = x - pad_x
-    r_y = y - pad_y
+    r_x = x - padx
+    r_y = y - pady
   if r_x > 0 and r_y > 0:
     let
       loc_x = floor(r_x / csize).int
